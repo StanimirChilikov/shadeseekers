@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/logoo2.png">
+  <title>Дарения – Shade Seekers</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f0fff0;
+      margin: 0;
+      padding: 0;
+    }
+
+    #donation-section {
+      background: #ffffff;
+      padding: 40px;
+      border-radius: 12px;
+      max-width: 500px;
+      margin: 60px auto;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    #donation-section h2 {
+      color: #2a6b2d;
+      margin-bottom: 10px;
+    }
+
+    #donation-section p {
+      color: #333;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    input[type=range] {
+      width: 80%;
+      margin: 20px 0;
+      accent-color: #2a6b2d;
+    }
+
+    #donateBtn {
+      background: #2a6b2d;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    #donateBtn:hover {
+      background: #3b8b3e;
+      transform: scale(1.05);
+    }
+
+    #thankYouMsg {
+      display: none;
+      margin-top: 25px;
+      color: #1e4620;
+      font-size: 17px;
+      background: #e6ffe8;
+      padding: 15px;
+      border-radius: 10px;
+      animation: fadeIn 0.8s ease-in-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(10px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+
+  <section id="donation-section">
+    <h2> Подкрепи Shade Seekers</h2>
+    <p>
+      Избери сумата, с която искаш да помогнеш — от <b>1 до 100 лв</b>.<br>
+      Всеки лев ни помага да правим София по-зелена, по-прохладна и по-безопасна.
+    </p>
+
+    <div>
+      <input id="donationAmount" type="range" min="1" max="100" value="10" oninput="updateDonationValue()">
+      <p style="margin-top:10px; font-size:18px;">Сума: <span id="donationValue">10</span> лв</p>
+    </div>
+
+    <button id="donateBtn">💸 Дарявай</button>
+
+    <p id="thankYouMsg">
+      ❤️ Благодарим ти! Помагаш на природата, на град София и на нашия екип да прави лятото по-прохладно за всички. 🌿
+    </p>
+  </section>
+
+  <script>
+    function updateDonationValue() {
+      const value = document.getElementById('donationAmount').value;
+      document.getElementById('donationValue').textContent = value;
+    }
+
+    document.getElementById('donateBtn').addEventListener('click', function() {
+      const section = document.getElementById('donation-section');
+      const thankYou = document.getElementById('thankYouMsg');
+      const amount = document.getElementById('donationAmount').value;
+
+      // Симулирано плащане (примерно)
+      setTimeout(() => {
+        thankYou.style.display = 'block';
+        section.scrollIntoView({ behavior: 'smooth' });
+      }, 600);
+    });
+  </script>
+
+</body>
+</html>

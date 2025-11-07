@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shade Seekers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600,900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* ===== DESIGN SYSTEM / COLOR TOKENS ===== */
+    :root {
+      /* Light mode palette */
+      --background: #fafbf9;
+      --foreground: #253823;
+      
+      --card: #ffffff;
+      --card-foreground: #253823;
+      
+      --primary: #486B5B;
+      --primary-foreground: #ffffff;
+      
+      --secondary: #f5f8f4;
+      --secondary-foreground: #253823;
+      
+      --accent: #8bc34a;
+      --accent-foreground: #253823;
+      
+      --border: #e8ebe6;
+      --input: #e8ebe6;
+      
+      --muted: #d5ddd5;
+      --muted-foreground: #7b9685;
+      
+      /* Shadows & Effects */
+      --shadow-soft: 0 2px 20px -4px rgba(37, 56, 35, 0.08);
+      --shadow-medium: 0 4px 30px -6px rgba(37, 56, 35, 0.12);
+      --shadow-hover: 0 8px 40px -8px rgba(37, 56, 35, 0.15);
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      
+      --radius: 1rem;
+    }
+
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      color: var(--foreground);
+      background: var(--background);
+      scroll-behavior: smooth;
+    }
+
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f5f8f4;
+      padding: 14px 48px;
+      box-shadow: var(--shadow-soft);
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 999;
+      border-bottom: 1px solid var(--border);
+    }
+
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: var(--foreground);
+      transition: var(--transition-smooth);
+      will-change: filter;
+    }
+
+
+    .logo:hover {
+      filter: drop-shadow(0 0 2em rgba(132, 195, 74, 0.3));
+    }
+
+
+    .logo-img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+      transition: var(--transition-smooth);
+    }
+
+
+    .logo-img:hover {
+      transform: scale(1.05);
+    }
+
+
+    .logo-img-footer {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+    }
+
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+
+    .nav-links a, .nav-links button {
+      text-decoration: none;
+      color: var(--foreground);
+      font-weight: 500;
+      position: relative;
+      transition: var(--transition-smooth);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+
+    .nav-links a::before, .nav-links button::before {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition-smooth);
+    }
+
+
+    .nav-links a:hover, .nav-links button:hover {
+      color: var(--primary);
+    }
+
+
+    .nav-links a:hover::before, .nav-links button:hover::before {
+      width: 100%;
+    }
+
+
+    .nav-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+
+
+    .lang-selector {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--foreground);
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: var(--transition-smooth);
+      background: transparent;
+      border: none;
+      will-change: background-color, color;
+    }
+
+
+    .lang-selector:hover {
+      background: rgba(139, 195, 74, 0.12);
+      color: var(--accent);
+    }
+
+
+    .lang-selector:active {
+      transform: scale(0.98);
+    }
+
+
+    .navbar-explore-btn {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      border-radius: 28px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      border: none;
+      padding: 10px 28px;
+      will-change: transform, box-shadow;
+      box-shadow: 0 4px 15px rgba(72, 107, 91, 0.25);
+      font-family: 'Inter', sans-serif;
+    }
+
+
+    .navbar-explore-btn:hover {
+      background: #3d5a4e;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(72, 107, 91, 0.35);
+    }
+
+
+    .navbar-explore-btn:active {
+      transform: scale(0.95);
+    }
+
+
+    /* ===== BUTTONS ===== */
+    .btn-base {
+      font-family: 'Inter', sans-serif;
+      border-radius: 28px;
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      border: none;
+      padding: 12px 32px;
+      will-change: transform, box-shadow;
+    }
+
+
+    .btn-base:active {
+      transform: scale(0.95);
+    }
+
+
+    .explore-btn-main {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      box-shadow: 0 4px 15px rgba(72, 107, 91, 0.25);
+      padding: 12px 32px;
+    }
+
+
+    .explore-btn-main:hover {
+      background: #3d5a4e;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(72, 107, 91, 0.35);
+    }
+
+
+    .primary-btn {
+      background: var(--primary);
+      color: var(--primary-foreground);
+      box-shadow: 0 4px 15px rgba(72, 107, 91, 0.25);
+    }
+
+
+    .primary-btn:hover {
+      background: #3d5a4e;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(72, 107, 91, 0.35);
+    }
+
+
+    .secondary-btn {
+      background: var(--card);
+      color: var(--primary);
+      border: 2px solid var(--border);
+    }
+
+
+    .secondary-btn:hover {
+      background: var(--secondary);
+      border-color: var(--accent);
+      box-shadow: var(--shadow-soft);
+      transform: translateY(-2px);
+    }
+
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--foreground);
+      overflow: hidden;
+      margin-top: 60px;
+    }
+
+
+    .hero-bg {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      animation: zoomIn 0.8s ease-out;
+    }
+
+
+    @keyframes zoomIn {
+      from {
+        transform: scale(1.02);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(245, 248, 244, 0.75) 0%, rgba(245, 248, 244, 0.40) 50%, rgba(245, 248, 244, 0.20) 100%);
+      backdrop-filter: blur(0.8px);
+      z-index: 1;
+    }
+
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      padding: 0 20px;
+      animation: fadeInUp 0.8s ease;
+    }
+
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    .hero h1 {
+      font-size: 3.4rem;
+      font-weight: 900;
+      margin: 0 0 16px 0;
+      line-height: 1.15;
+      color: #1a1a1a;
+      letter-spacing: -0.02em;
+    }
+
+
+    .hero h1 span {
+      display: block;
+    }
+
+
+    .hero .cream {
+      color: #293C37;
+      font-weight: 900;
+    }
+
+
+    .hero .green {
+      color: #486B5B;
+      font-weight: 900;
+    }
+
+
+    .hero p {
+      max-width: 650px;
+      margin: 0 auto 36px auto;
+      font-size: 1.2rem;
+      color: #7b9685;
+      line-height: 1.6;
+      letter-spacing: 0.3px;
+    }
+
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+
+
+    /* ===== SECTIONS ===== */
+    .about-section, .locations, .why, .cta {
+      padding: 100px 24px;
+    }
+
+
+    .about-section, .why {
+      background: var(--card);
+    }
+
+
+    .locations, .cta {
+      background: var(--secondary);
+    }
+
+
+    .container-white, .container-gray {
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+
+    .about-section h2, .locations h2, .cta h2, .why h2 {
+      font-size: 2.5rem;
+      margin: 0 0 16px 0;
+      font-weight: 900;
+      animation: slideDown 0.6s ease;
+      letter-spacing: -0.01em;
+    }
+
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    .subtitle {
+      color: var(--muted-foreground);
+      margin: 0 0 56px 0;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+
+    .about-section p {
+      color: #608c60;
+      line-height: 1.8;
+      font-size: 1.05rem;
+      margin: 20px auto;
+      max-width: 800px;
+    }
+
+
+    /* ===== VALUES ===== */
+    .values {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 50px;
+      flex-wrap: wrap;
+    }
+
+
+    .value-item {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 36px 28px 32px;
+      width: 300px;
+      box-shadow: var(--shadow-soft);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 1px solid var(--border);
+      transition: var(--transition-smooth);
+      will-change: transform, box-shadow;
+    }
+
+
+    .value-item:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-8px);
+    }
+
+
+    .icon-box {
+      width: 64px;
+      height: 64px;
+      background: rgba(132, 195, 74, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition-smooth);
+    }
+
+
+    .value-item:hover .icon-box {
+      background: rgba(132, 195, 74, 0.15);
+      transform: scale(1.08) rotate(5deg);
+    }
+
+
+    .value-item h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0 0 12px 0;
+      color: var(--foreground);
+    }
+
+
+    .value-item p {
+      color: #608c60;
+      line-height: 1.6;
+      margin: 0;
+      font-size: 0.95rem;
+    }
+
+
+    /* ===== CARDS ===== */
+    .cards {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin: 50px 0 40px 0;
+      flex-wrap: wrap;
+    }
+
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-soft);
+      padding: 32px 28px 28px;
+      width: 320px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: var(--transition-smooth);
+      will-change: transform, box-shadow;
+    }
+
+
+    .card:hover {
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-8px);
+      border-color: var(--accent);
+    }
+
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(132, 195, 74, 0.1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      box-shadow: var(--shadow-soft);
+      transition: var(--transition-smooth);
+    }
+
+
+    .card:hover .card-icon {
+      transform: scale(1.12) rotate(-5deg);
+      background: rgba(132, 195, 74, 0.15);
+    }
+
+
+    .card h4 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0 0 6px 0;
+      color: var(--foreground);
+    }
+
+
+    .type {
+      color: var(--accent);
+      font-size: 0.95rem;
+      margin: 0 0 8px 0;
+      font-weight: 600;
+    }
+
+
+    .desc {
+      color: #608c60;
+      line-height: 1.6;
+      margin: 0 0 14px 0;
+      font-size: 0.95rem;
+    }
+
+
+    .link-btn {
+      align-self: flex-start;
+      background: none;
+      border: none;
+      color: var(--foreground);
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0;
+      margin-top: 8px;
+      transition: var(--transition-smooth);
+      position: relative;
+      will-change: color;
+    }
+
+
+    .link-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition-smooth);
+    }
+
+
+    .link-btn:hover {
+      color: var(--accent);
+    }
+
+
+    .link-btn:hover::after {
+      width: 100%;
+    }
+
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--secondary);
+      border-top: 1px solid var(--border);
+      font-size: 1rem;
+      padding: 48px 0 0 0;
+    }
+
+
+    .footer-cols {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 60px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 40px 32px;
+      flex-wrap: wrap;
+    }
+
+
+    .footer-cols h5 {
+      margin: 0 0 16px 0;
+      font-size: 1rem;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+
+    .footer-cols ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+
+    .footer-cols li {
+      margin-bottom: 10px;
+    }
+
+
+    .footer-cols a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: var(--transition-smooth);
+    }
+
+
+    .footer-cols a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+
+    .footer-bottom {
+      text-align: center;
+      color: var(--muted-foreground);
+      font-size: 0.96rem;
+      padding: 24px 0;
+      border-top: 1px solid var(--border);
+    }
+
+
+    .footer-desc {
+      color: #608c60;
+      margin-top: 12px;
+      max-width: 240px;
+      line-height: 1.6;
+    }
+
+
+    /* ===== CTA ===== */
+    .center {
+      display: flex;
+      justify-content: center;
+      margin-top: 32px;
+    }
+
+
+    .full {
+      min-width: 280px;
+    }
+
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+    }
+
+
+    .cta p {
+      color: #608c60;
+      line-height: 1.65;
+      font-size: 1.05rem;
+      margin-bottom: 36px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .navbar {
+        padding: 12px 24px;
+      }
+
+
+      .nav-links {
+        display: none;
+      }
+
+
+      .nav-actions {
+        gap: 10px;
+      }
+
+
+      .hero {
+        margin-top: 50px;
+      }
+
+
+      .hero h1 {
+        font-size: 2.4rem;
+      }
+
+
+      .hero p {
+        font-size: 1.05rem;
+      }
+
+
+      .values, .cards, .footer-cols {
+        flex-direction: column;
+        align-items: center;
+      }
+
+
+      .values {
+        gap: 28px;
+      }
+
+
+      .cards {
+        gap: 24px;
+      }
+
+
+      .footer-cols {
+        gap: 32px;
+      }
+
+
+      .about-section, .locations, .why, .cta {
+        padding: 60px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="images/logoo2.png" alt="Shade Seekers" class="logo-img">
+        <span>Shade Seekers</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#locations">Locations</a></li>
+        <li><a href="#benefits">Benefits</a></li>
+        <li><a href="#contact">Get Involved</a></li>
+        <li><button onclick="handleGallery()" title="View Gallery">Gallery</button></li>
+      </ul>
+      <div class="nav-actions">
+        <div class="lang-selector" onclick="toggleLanguage()" title="Toggle Language">
+          <i class="fas fa-globe"></i>
+          <span id="lang-text">EN</span>
+        </div>
+        <button class="navbar-explore-btn" onclick="handleExploreMap()" title="Explore Map">Explore Map</button>
+      </div>
+    </nav>
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <img src="images/AI_main.jpg" alt="Urban Oases" class="hero-bg">
+      <div class="hero-content">
+        <h1><span class="cream">Urban Oases for</span><span class="green">Modern Life</span></h1>
+        <p>Discover a network of quiet, shady corners throughout Sofia—thoughtfully designed spaces where nature meets contemporary urban living</p>
+        <div class="hero-buttons">
+          <button class="primary-btn btn-base">Find Your Spot</button>
+          <button class="secondary-btn btn-base">Learn More</button>
+        </div>
+      </div>
+    </section>
+  </header>
+  <main>
+    <section class="about-section" id="about">
+      <div class="container-white">
+        <h2>Reimagining Urban Spaces</h2>
+        <p>Shade Seekers partners with the Sofia municipality and local citizens to transform underutilized urban areas into welcoming sanctuaries. Our mission is to create a network of beautifully designed, naturally-integrated spaces that offer respite from the bustle of city life.</p>
+        <p>Through innovative design, community collaboration, and sustainable practices, we're building environments where people can relax, connect, and thrive—one shaded corner at a time.</p>
+      </div>
+    </section>
+
+
+    <section class="locations" id="locations">
+      <div class="container-gray">
+        <h2>Featured Locations</h2>
+        <p class="subtitle">Explore our growing network of urban oases across Sofia</p>
+        <div class="cards">
+          <div class="card">
+            <div class="card-icon">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 13a3 3 0 100-6 3 3 0 000 6z" stroke="#85ab85" stroke-width="2"/><path d="M13 23s8-6 8-12c0-4.42-3.58-8-8-8s-8 3.58-8 8c0 6 8 12 8 12z" stroke="#85ab85" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h4>Borisova Garden Hub</h4>
+            <p class="type">Park</p>
+            <p class="desc">Peaceful corner with modern seating under century-old trees</p>
+            <button class="link-btn">View Details →</button>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 13a3 3 0 100-6 3 3 0 000 6z" stroke="#85ab85" stroke-width="2"/><path d="M13 23s8-6 8-12c0-4.42-3.58-8-8-8s-8 3.58-8 8c0 6 8 12 8 12z" stroke="#85ab85" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h4>NDK Plaza Retreat</h4>
+            <p class="type">Plaza</p>
+            <p class="desc">Contemporary shaded pavilion perfect for lunch breaks</p>
+            <button class="link-btn">View Details →</button>
+          </div>
+          <div class="card">
+            <div class="card-icon">
+              <svg width="26" height="26" viewBox="0 0 26 26" fill="none"><path d="M13 13a3 3 0 100-6 3 3 0 000 6z" stroke="#85ab85" stroke-width="2"/><path d="M13 23s8-6 8-12c0-4.42-3.58-8-8-8s-8 3.58-8 8c0 6 8 12 8 12z" stroke="#85ab85" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h4>Vitosha Boulevard Corner</h4>
+            <p class="type">Street</p>
+            <p class="desc">Urban pocket park with natural cooling and WiFi</p>
+            <button class="link-btn">View Details →</button>
+          </div>
+        </div>
+        <div class="center">
+          <button class="explore-btn-main btn-base full">View All Locations on Map</button>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="why" id="benefits">
+      <div class="container-white">
+        <h2>Why Shade Seekers?</h2>
+        <p class="subtitle">Creating value for citizens, communities, and the urban environment</p>
+        <div class="values">
+          <div class="value-item">
+            <div class="icon-box">
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M17 7c-4.23 2.14-7.31 5.39-10 11.2M21 12c-1.88 2.63-3.85 6.04-8 8.8" stroke="#466046" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Natural Integration</h3>
+            <p>Thoughtfully designed spaces that blend modern comfort with nature's tranquility</p>
+          </div>
+          <div class="value-item">
+            <div class="icon-box">
+              <svg height="30" width="30" viewBox="0 0 30 30" fill="none"><path d="M15 13a4 4 0 100-8 4 4 0 000 8zm7 10c0-3.87-3.13-7-7-7s-7 3.13-7 7" stroke="#466046" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Community Building</h3>
+            <p>Foster connections and social interaction in welcoming urban environments</p>
+          </div>
+          <div class="value-item">
+            <div class="icon-box">
+              <svg width="30" height="30" viewBox="0 0 30 30" fill="none"><path d="M15 22s7-4.91 7-10.25C22 8.01 19.544 6 15 6c-4.544 0-7 2.01-7 5.75C8 17.09 15 22 15 22z" stroke="#466046" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Urban Wellness</h3>
+            <p>Provide respite from city stress with accessible relaxation zones</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="cta" id="contact">
+      <div class="container-gray">
+        <h2>Join the Movement</h2>
+        <p>Whether you're a citizen with a location idea, a business interested in partnership, or a municipality representative exploring collaboration—we'd love to hear from you.</p>
+        <div class="cta-buttons">
+          <button class="primary-btn btn-base">Suggest a Location</button>
+          <button class="secondary-btn btn-base">Partner With Us</button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-cols">
+      <div>
+        <div class="logo">
+          <img src="images/logoo2.jpg" alt="Shade Seekers" class="logo-img-footer">
+          <span>Shade Seekers</span>
+        </div>
+        <p class="footer-desc">Creating urban oases for modern life, one shaded corner at a time.</p>
+      </div>
+      <div>
+        <h5>Quick Links</h5>
+        <ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#locations">Locations</a></li>
+          <li><a href="#benefits">Benefits</a></li>
+          <li><a href="#contact">Get Involved</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contact</h5>
+        <p>Email: <a href="mailto:hello@shadeseekers.bg">hello@shadeseekers.bg</a><br>Sofia, Bulgaria</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2024 Shade Seekers. Building better cities together.
+    </div>
+  </footer>
+  <script>
+    let currentLang = 'EN';
+
+
+    function toggleLanguage() {
+      if (currentLang === 'EN') {
+        currentLang = 'BG';
+        document.getElementById('lang-text').textContent = 'BG';
+        updatePageLanguage('BG');
+      } else {
+        currentLang = 'EN';
+        document.getElementById('lang-text').textContent = 'EN';
+        updatePageLanguage('EN');
+      }
+    }
+
+
+    function updatePageLanguage(lang) {
+      if (lang === 'BG') {
+        document.querySelectorAll('.nav-links a')[0].textContent = 'За нас';
+        document.querySelectorAll('.nav-links a')[1].textContent = 'Локации';
+        document.querySelectorAll('.nav-links a')[2].textContent = 'Ползи';
+        document.querySelectorAll('.nav-links a')[3].textContent = 'Включи се';
+        
+        document.querySelectorAll('.nav-links button')[0].textContent = 'Галерия';
+        
+        document.querySelector('.navbar-explore-btn').textContent = 'Разгледай Картата';
+        
+        document.querySelector('.cream').textContent = 'Градски Оазиси за';
+        document.querySelector('.green').textContent = 'Модерен Живот';
+        document.querySelectorAll('.hero p')[0].textContent = 'Откройте мрежа от тихи, сенчести кътчета в София—внимателно проектирани пространства, където природата среща съвременния градски живот';
+        
+        document.querySelectorAll('.primary-btn')[0].textContent = 'Намери Място';
+        document.querySelectorAll('.secondary-btn')[0].textContent = 'Научи Повече';
+      } else {
+        document.querySelectorAll('.nav-links a')[0].textContent = 'About';
+        document.querySelectorAll('.nav-links a')[1].textContent = 'Locations';
+        document.querySelectorAll('.nav-links a')[2].textContent = 'Benefits';
+        document.querySelectorAll('.nav-links a')[3].textContent = 'Get Involved';
+        
+        document.querySelectorAll('.nav-links button')[0].textContent = 'Gallery';
+        
+        document.querySelector('.navbar-explore-btn').textContent = 'Explore Map';
+        
+        document.querySelector('.cream').textContent = 'Urban Oases for';
+        document.querySelector('.green').textContent = 'Modern Life';
+        document.querySelectorAll('.hero p')[0].textContent = 'Discover a network of quiet, shady corners throughout Sofia—thoughtfully designed spaces where nature meets contemporary urban living';
+        
+        document.querySelectorAll('.primary-btn')[0].textContent = 'Find Your Spot';
+        document.querySelectorAll('.secondary-btn')[0].textContent = 'Learn More';
+      }
+    }
+
+
+    function handleGallery() {
+      alert('Gallery coming soon!');
+    }
+
+
+    function handleExploreMap() {
+      alert('Redirecting to map...');
+    }
+
+
+    document.querySelectorAll('.link-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        alert('More details coming soon!');
+      });
+    });
+
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+
+    document.querySelectorAll('.value-item, .card').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'all 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>

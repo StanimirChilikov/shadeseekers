@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHADE SEEKERS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+    <link href="images/logoo2.png" type="image/png">
+    <link rel="icon" type="image/x-icon" href="images/logoo2.png">
+    <style>
+        body {
+            background: #f6f8f4;
+        }
+        .team-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+        .member-card {
+            background-color: #e8f5e9;
+            border-radius: 20px;
+            padding: 20px;
+            width: 250px;
+            box-shadow: 0 4px 10px rgba(34, 70, 34, 0.08);
+            text-align: center;
+        }
+        .member-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #4caf50;
+            margin-bottom: 15px;
+        }
+        .name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        .school {
+            font-size: 16px;
+            color: #388e3c;
+        }
+        .description {
+            font-size: 14px;
+            color: #4e944f;
+            margin-top: 10px;
+        }
+        .krai{
+            align-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .fa-bars, .fa-times {
+            display: none;
+        }
+        @media (max-width: 700px) {
+            .fa-bars, .fa-times {
+                display: block;
+                color: #fff;
+                margin: 10px;
+                font-size: 22px;
+                cursor: pointer;
+            }
+        }
+        .nav-links ul li::after {
+            content: '';
+            width: 0%;
+            height: 2px;
+            background: #7bb661;
+            display: block;
+            margin: auto;
+            transition: 0.5s;
+        }
+        .nav-links ul li:hover::after {
+            width: 100%;
+        }
+        .price-col h3 {
+            font-size: 44px;
+            margin: 20px 0 40px;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        .price-col h3 span {
+            font-size: 16px;
+        }
+        @media (max-width: 400px) {
+            .price-col h3 {
+                font-size: 28px;
+                white-space: normal;
+            }
+        }
+        .text-box h1 {
+            font-family: 'Montserrat', 'Poppins', sans-serif;
+            font-size: 64px;
+            color: #24512c;
+            text-shadow: 0 4px 24px rgba(34, 70, 34, 0.18), 0 1px 0 #fff;
+            letter-spacing: 2px;
+            margin-bottom: 18px;
+        }
+        #FrontIng {
+            background: #e8f5e9;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(34, 70, 34, 0.08);
+            padding: 24px 18px 18px 18px;
+            margin: 0 auto 18px auto;
+            max-width: 600px;
+        }
+        #InfoForWeb {
+            color: #24512c;
+            font-size: 18px;
+            font-weight: 500;
+            text-shadow: 0 1px 0 #fff;
+            border: none;
+            background: none;
+            margin: 0;
+        }
+        .green-quote {
+            display: block;
+            margin-top: 12px;
+            /* color: #388e3c; */
+            color: rgb(138, 154, 91);
+            font-size: 20px;
+            font-style: italic;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .section-divider {
+            width: 100%;
+            height: 60px;
+            background: linear-gradient(90deg, #1f283b 0%, #2e7d32 100%);
+            margin: 60px 0 0 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .section-divider span {
+            color: #fff;
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .icons i {
+            color: #24512c;
+            font-size: 30px;
+            margin: 0 13px;
+            cursor: pointer;
+            padding: 18px 0;
+            transition: color 0.2s;
+        }
+        .icons i:hover { 
+            color: #4e944f;
+        }
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: 30px 0;
+            background: #e8f5e9;
+        }
+        .footer h4 {
+            margin-bottom: 25px;
+            margin-top: 20px;
+            font-weight: 600;
+            color: #24512c;
+            font-size: 28px;
+            letter-spacing: 1px;
+        } 
+        .section-title {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #24512c;
+            font-size: 32px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+        @media (max-width: 900px) {
+            .team-container {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+        .testimonial-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 24px rgba(34,70,34,0.2);
+        }
+        @keyframes fadeUp {
+            from {opacity:0; transform:translateY(40px);}
+            to {opacity:1; transform:translateY(0);}
+        }
+    .article-card {
+        background:#fff;
+        border-radius:16px;
+        overflow:hidden;
+        width:300px;
+        box-shadow:0 8px 20px rgba(34,70,34,0.1);
+        transition:transform 0.3s, box-shadow 0.3s;
+        animation:fadeUp 1s ease;
+    }
+    .article-card img {
+        width:100%;
+        height:180px;
+        object-fit:cover;
+        transition:transform 0.4s ease;
+    }
+    .article-card:hover img {
+        transform:scale(1.1);
+    }
+    .article-card:hover {
+        transform:translateY(-10px);
+        box-shadow:0 12px 24px rgba(34,70,34,0.2);
+    }
+    .article-content {
+        padding:20px;
+    }
+    .article-content h3 {
+        color:#2e7d32;
+        font-size:20px;
+        margin-bottom:10px;
+    }
+    .article-content p {
+        color:#4e944f;
+        font-size:15px;
+        margin-bottom:15px;
+    }
+    .article-content a {
+        color:#388e3c;
+        font-weight:600;
+        text-decoration:none;
+        transition:color 0.3s;
+    }
+    .article-content a:hover {
+        color:#24512c;
+    }
+        /* .testimonials{
+            width: 80%;
+            margin: auto;
+            padding-top: 100px;
+            text-align: center;
+        }
+        .testimonial-col{
+            flex-basis: 44%;
+            border-radius: 10px;
+            margin-bottom: 5px;
+            text-align: left;
+            background: #fff3f3;
+            padding: 25px;
+            cursor: pointer;
+            display: flex;
+        }
+        .testimonial-col img{
+            height: 40px;
+            margin-left: 5px;
+            margin-right: 30px;
+            border-radius: 50%;
+        }
+        .testimonial-col p{
+            padding: 0;
+        }
+        .testimonial-col h3{
+            margin-top: 15px;
+            text-align: center;
+        }
+        .testimonial-col .fa{
+            color: #2e7d32;
+        } */
+    </style>
+</head>
+<body>
+    <section class="header">
+        <nav>
+            <a href="index.html"><img width="150px" height="130px" src="images/logoo2.png"></a> 
+            <div class="nav-links" id="navLinks">
+                <i class="fas fa-times" onclick="hideMenu()"></i>
+                <ul>
+                    <li><a href="main.html">HOME</a></li>
+                    <li><a href="#safety-rules">TIPS</a></li>
+                    <li><a href="karta2.html">MAPS</a></li>
+                    <li><a href="contact.html">CONTACT</a></li>
+                    <li><a href="img-with-photos.html">PHOTOS</a></li>
+                    <li><a href="timeline.html">TIMELINE</a></li>
+                </ul>
+            </div>
+            <i class="fas fa-bars" onclick="showMenu()"></i>
+        </nav> 
+        
+        <div class="text-box">
+            <h1>SHADE SEEKERS</h1>
+            <div id="FrontIng">
+                <p id="InfoForWeb">
+                    Даваме съвети за справяне с жегата, сенчести маршрути до места за релакс и отдих в града, както и най-новата ни функция SOS бутона за директна локация до нашия екип при спешност.
+                    <span class="green-quote">"Мислим зелено за по-добро бъдеще"</span>
+                </p>
+            </div>
+            <a href="osnovnakarta.html" class="hero-btn">Научи повече тук</a>
+        </div>
+    </section>
+
+    <!-- Съвети за сън при горещини -->
+    <section class="emergency" id="safety-rules">
+        <h1 class="section-title">Съвети при горещини</h1>
+        <p>Указания за действия при различни спешни случаи:</p>
+        <div class="row">
+            <div class="emergency-col">
+                <h3>ИЗБЯГВАЙТЕ ГОРЕЩИТЕ ЧАСОВЕ</h3>
+                <p>Когато температурите се повишат драстично, най-добре е да останем на сянка. Избягвайте излизания между 11:00 и 16:00 ч. – това са часовете, в които слънцето е най-силно и опасно. Ако все пак трябва да излезете, търсете сянка и стойте на проветриво място.</p>
+            </div>
+            <div class="emergency-col">
+                <h3>ХИДРАТАЦИЯТА Е ВАЖНА!</h3>
+                <p>Не чакайте да ожаднеете – пийте вода редовно през целия ден! В горещините тялото губи повече течности, затова е важно да ги възстановяваме навреме. Избягвайте алкохол и подсладени напитки – те само допълнително дехидратират.</p>
+            </div>
+            <div class="emergency-col">
+                <h3>ДРЕХИТЕ СЪЩО ПОМАГАТ</h3>
+                <p>Изберете светли, удобни и дишащи дрехи от естествени материи. Шапка с козирка и слънчеви очила също са добра идея. Така ще помогнете на тялото си да се охлажда по-лесно и ще се чувствате по-комфортно.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="section-divider"><span>Подкрепете ни</span></div>
+
+    <div style="background: #1f283b; color: #fff; text-align: center; padding: 40px 0 30px 0;">
+        <h2 style="font-size: 28px; margin-bottom: 12px; letter-spacing: 1px;">Дарете за повече зелени градове</h2>
+        <p style="font-size: 18px; margin-bottom: 18px;">Вашата подкрепа ни помага да развиваме нови функции и да правим града по-прохладен и приятен за всички.</p>
+        <a href="donate.html" style="display: inline-block; background: #388e3c; color: #fff; padding: 14px 36px; border-radius: 8px; font-size: 18px; text-decoration: none; font-weight: 600; transition: background 0.3s;">Дарете сега</a>
+    </div>
+
+    <h2 class="section-title" style="margin-top: 40px;">Екипът ни:</h2>
+    <div class="team-container">
+        <div class="member-card">
+            <img src="images/stani.jpg" alt="Член 1">
+            <div class="name">Станимир Чиликов</div>
+            <div class="school">Създател и реализатор на идеята</div>
+            <div class="description">Реших да направя този проект, защото ми е интересно да измисялм иновативни екологични идеи или поне колкото мога. Харесвам тениса и морските градове.</div>
+        </div>
+        <div class="member-card">
+            <img src="images/rali.jpg" alt="Член 2">
+            <div class="name">Ралица Терзийска</div>
+            <div class="school">Директор Реклама и Дизайн</div>
+            <div class="description">Учавствам в този проект, защото мисля, че е важно да подкрепявем хората и да помагаме на природата чрез нашите умения. Обичам да се разхождам сред природата.</div>
+        </div>
+        <div class="member-card">
+            <img src="images/emi.png" alt="Член 3">
+            <div class="name">Емиляна Любенова</div>
+            <div class="school">Отговорник социални мрежи и маркетинг</div>
+            <div class="description">Участвам в този проект, защото вярвам, че можем да направим нещо полезно и смислено за хората и природата около нас. Харесвам да чета.</div>
+        </div>
+         <div class="member-card">
+            <img src="images/alex.jpg" alt="Член 4">
+            <div class="name">Алекс Андонов</div>
+            <div class="school">Мениджър и изпълнителен директор</div>
+            <div class="description">Мотивира ме самата програма, че е създадена в наша помощ и иска да разиве нашите ,,зелени идеи" . Също така ме мотивира работата в екип и комуникацията с организаторите.</div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Избери своя план:</h2>
+        <div class="price-row">
+            <div class="price-col">
+                <p>Starter </p>
+                <h3>Freemium</h3>
+                <ul>
+                    <li>Включва:</li>
+                    <li>SOS бутон в спешни случай</li>
+                    <li>маршрут до определена локация по зелен път</li>
+                    <li>достъп до съвети за горещо време, които ще се обновяват</li>
+                </ul>
+            </div>
+            <div class="price-col">
+                <p>Advanced</p>
+                <h3>7,99 лв <span>/месец</span></h3>
+                <h4>4,09 € <span>/месец</span></h4>
+                <ul>
+                    <li>Допълнителни неща като:</li>
+                    <li>специални обекти на картата</li>
+                    <li>зелен локации и маршрути</li>
+                    <li>може да прегладате съвети, които да бъдат написани в сайта</li>
+                    <li>Dop neshta</li>
+                </ul>
+                <button onclick="window.location.href='payment7.html'">Добави в количката</button>
+            </div>
+            <div class="price-col">
+                <p>Premium </p>
+                <h3>15,99 лв <span>/месец</span></h3>
+                <h4>7,76 € <span>/месец</span></h4>
+                <ul>
+                    <li>Подходящо за бизнеси</li>
+                    <li>обяви на еко обекти</li>
+                    <li>партньорство с нас</li>
+                    <li>специално обозначение на картата </li>
+                    <li>реклама на нашите партньори</li>
+                </ul>
+                <button onclick="window.location.href='payment15.html'">Добави в количката</button>
+            </div>
+        </div>
+        <p class="krai">© 2025 Проект "SHADE SEEKERS" | Зеленоватори</p>
+    </div>
+
+    <!-- <section class="testimonials">
+        <h1>What our customers Says</h1>
+        <p>bla bla bla blaaaa</p>
+
+        <div class="row">
+            <div class="testimonial-col">
+                <img src="images/user1.jpg" alt="user1">
+                <div>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                    </p>
+                    <h3>Yana Georgieva</h3>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+            </div>
+
+            <div class="testimonial-col">
+                <img src="images/user2.jpg" alt="user1">
+                <div>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                    </p>
+                    <h3>Boris Tonchev</h3>
+                     <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                </div>
+            </div>
+        </div>
+
+    </section> -->
+        <!-- Testimonials Section -->
+<section class="testimonials" style="background:linear-gradient(135deg,#e8f5e9,#f6f8f4); padding:80px 20px;">
+    <h1 class="section-title" style="color:#24512c; text-align:center;">Какво казват хората за нас</h1>
+    <p style="text-align:center; margin-bottom:50px; color:#4e944f; font-size:18px;">
+        Истински истории от хора, които вече използват SHADE SEEKERS и правят града по-зелен 🌱
+    </p>
+
+    <div class="testimonial-container" style="display:flex; flex-wrap:wrap; justify-content:center; gap:40px;">
+        
+        <div class="testimonial-card" style="background:#fff; border-radius:16px; padding:30px; max-width:320px; box-shadow:0 8px 20px rgba(34,70,34,0.1); transition:transform 0.3s, box-shadow 0.3s; animation:fadeUp 1s ease;">
+            <img src="images/user1.jpg" alt="user1" style="width:70px; height:70px; border-radius:50%; margin-bottom:15px; border:3px solid #4caf50;">
+            <p style="color:#2e7d32; font-style:italic;">„Най-накрая намерих прохладен път до университета – без SHADE SEEKERS щях да се стопя от жегата!“</p>
+            <h3 style="margin-top:15px; color:#24512c;">Иван Димитров</h3>
+            <div style="color:#fbc02d; margin-top:8px;">
+                ★★★★★
+            </div>
+        </div>
+
+        <div class="testimonial-card" style="background:#fff; border-radius:16px; padding:30px; max-width:320px; box-shadow:0 8px 20px rgba(34,70,34,0.1); transition:transform 0.3s, box-shadow 0.3s; animation:fadeUp 1.2s ease;">
+            <img src="images/user2.jpg" alt="user2" style="width:70px; height:70px; border-radius:50%; margin-bottom:15px; border:3px solid #4caf50;">
+            <p style="color:#2e7d32; font-style:italic;">„Съветите за горещините на сайта са злато! А SOS бутонът ми дава спокойствие, когато съм сама в парка.“</p>
+            <h3 style="margin-top:15px; color:#24512c;">Мария Николова</h3>
+            <div style="color:#fbc02d; margin-top:8px;">
+                ★★★★★
+            </div>
+        </div>
+
+        <div class="testimonial-card" style="background:#fff; border-radius:16px; padding:30px; max-width:320px; box-shadow:0 8px 20px rgba(34,70,34,0.1); transition:transform 0.3s, box-shadow 0.3s; animation:fadeUp 1.4s ease;">
+            <img src="images/user3.jpg" alt="user3" style="width:70px; height:70px; border-radius:50%; margin-bottom:15px; border:3px solid #4caf50;">
+            <p style="color:#2e7d32; font-style:italic;">„Никога не съм си мислил, че едно приложение може да ме накара да обичам града си повече!“</p>
+            <h3 style="margin-top:15px; color:#24512c;">Георги Петров</h3>
+            <div style="color:#fbc02d; margin-top:8px;">
+                ★★★★★
+            </div>
+        </div>
+    </div>
+</section>  
+        <!-- Articles Section -->
+<section class="articles" style="padding:80px 20px; background:#f6f8f4;">
+    <h1 class="section-title" style="color:#24512c; text-align:center;">Нашите статии</h1>
+    <p style="text-align:center; margin-bottom:50px; color:#4e944f; font-size:18px;">
+        Последни новини и съвети за по-зелен и прохладен град 🌍
+    </p>
+
+    <div class="articles-container" style="display:flex; flex-wrap:wrap; justify-content:center; gap:30px;">
+        
+        <div class="article-card">
+            <img src="images/eco1.jpg" alt="Eco Article">
+            <div class="article-content">
+                <h3>Как да спим спокойно през тропическите нощи</h3>
+                <p>Съвети за по-добър сън и комфорт по време на летните горещини.</p>
+                <a href="article1.html">Прочети повече →</a>
+            </div>
+        </div>
+
+        <div class="article-card">
+            <img src="images/eco2.jpg" alt="Eco Article">
+            <div class="article-content">
+                <h3>Тайните зелени маршрути в София</h3>
+                <p>Открийте сенчестите пътеки и прохладните места в града.</p>
+                <a href="article2.html">Прочети повече →</a>
+            </div>
+        </div>
+
+        <div class="article-card">
+            <img src="images/eco3.jpg" alt="Eco Article">
+            <div class="article-content">
+                <h3>Технологиите срещу горещините</h3>
+                <p>Как SHADE SEEKERS и други иновации правят града по-приятен.</p>
+                <a href="article3.html">Прочети повече →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+    <!-- <section class="footer">
+        <h4>За нас</h4>
+        <p>Ние сме Greenovators – екип от млади хора с идеи за по-прохладен и по-приятен град.<br>
+            Създадохме този сайт, за да помогнем в борбата с тропическите нощи, като събираме на едно място чешми, сенчести и прохладни зони, достъпни за всички.<br>
+            Вярваме, че с технологии, грижа и креативност градът може да стане по-хладно и приятно място за хората и животните!
+        </p>
+        <div class="icons">
+            <a href="https://www.facebook.com/stanimir.chilikov.18" target="_blank" aria-label="Facebook">
+                <i class="fab fa-facebook-square"></i>
+            </a>
+            <a href="https://www.instagram.com/shade__seekers/" target="_blank" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
+    </section> -->
+        <!-- Footer -->
+<section class="footer">
+    <h4>За нас</h4>
+    <p>Ние сме <strong>Greenovators</strong> – екип от млади хора с идеи за по-прохладен и по-приятен град. <br>
+        Създадохме този сайт, за да помогнем в борбата с тропическите нощи, като събираме на едно място чешми, сенчести и прохладни зони, достъпни за всички. <br>
+        Вярваме, че с технологии, грижа и креативност градът може да стане по-хладно и приятно място за хората и животните!
+    </p>
+    <div class="icons">
+        <i class="fab fa-facebook-square"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-twitter"></i>
+    </div>
+</section>
+
+    <script>
+        var navLinks = document.getElementById("navLinks");
+        function showMenu(){
+            navLinks.style.right = "0";
+        }
+        function hideMenu(){
+            navLinks.style.right = "-200px";
+        }
+    </script>
+</body>
+</html>

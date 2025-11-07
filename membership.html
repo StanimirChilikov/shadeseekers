@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+  <meta charset="UTF-8" />
+  <title>Shade Seekers - Планове и Дарение</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://fonts.googleapis.com/css?family=Inter:400,600,900&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="images/logoo2.png">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', Arial, sans-serif;
+      background: rgb(138, 154, 91);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 40px;
+    }
+    h2 {
+      font-size: 32px;
+      padding: 50px 0 20px 0;
+      text-align: center;
+    }
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: auto;
+    }
+    .price-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      justify-items: center;
+    }
+    .price-col {
+      background: #1f283b;
+      padding: 10% 15%;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    .price-col:hover {
+      transform: translateY(-10px);
+    }
+    .price-col p {
+      font-size: 22px;
+      margin: 0 0 10px 0;
+    }
+    .price-col h3 {
+      font-size: 44px;
+      margin: 20px 0 20px;
+      font-weight: 500;
+    }
+    .price-col h3 span {
+      font-size: 16px;
+      font-weight: 600;
+    }
+    .price-col ul {
+      text-align: left;
+      margin: 20px 0;
+      color: #ddd;
+      list-style: none;
+      padding: 0;
+    }
+    .price-col ul li {
+      margin: 12px 0;
+      position: relative;
+      padding-left: 20px;
+    }
+    .price-col ul li::before {
+      content: '\2022';
+      color: #8bc34a;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-size: 20px;
+      line-height: 1;
+    }
+    .price-col button {
+      width: 100%;
+      padding: 14px 0;
+      background: transparent;
+      color: #fff;
+      font-size: 16px;
+      border: 2px solid #8bc34a;
+      border-radius: 6px;
+      margin-top: 30px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+    .price-col button:hover {
+      background: #8bc34a;
+      color: #1f283b;
+      border-color: #6fa427;
+      box-shadow: 0 4px 10px rgba(111,164,39,0.5);
+    }
+    /* Section divider */
+    .section-divider {
+      margin: 70px 0 30px 0;
+      text-align: center;
+      position: relative;
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: 1.5px;
+      color: #f7f7f7;
+    }
+    .section-divider span {
+      background: rgb(138, 154, 91);
+      padding: 0 15px;
+      position: relative;
+      z-index: 1;
+    }
+    .section-divider::before {
+      content: "";
+      position: absolute;
+      left: 10%;
+      top: 50%;
+      right: 10%;
+      height: 1px;
+      background: #e4e7e2;
+      transform: translateY(-50%);
+      z-index: 0;
+      opacity: 0.25;
+    }
+    /* Donate block */
+    .donate-block {
+      background: #1f283b;
+      color: #fff;
+      text-align: center;
+      padding: 40px 20px 30px 20px;
+      border-radius: 12px;
+      max-width: 1100px;
+      width: 90%;
+      margin: auto;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    .donate-block h2 {
+      font-size: 28px;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+    .donate-block p {
+      font-size: 18px;
+      margin-bottom: 18px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .donate-block a {
+      display: inline-block;
+      background: #388e3c;
+      color: #fff;
+      padding: 14px 36px;
+      border-radius: 8px;
+      font-size: 18px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s;
+      box-shadow: 0 4px 12px rgba(56,142,60,0.6);
+    }
+    .donate-block a:hover {
+      background: #6fac69;
+      box-shadow: 0 6px 18px rgba(111,172,105,0.8);
+    }
+    .krai {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #dde3d6;
+      user-select: none;
+    }
+    .trees-info {
+  text-align: center;
+  color: #fff;
+  margin: 50px auto 30px auto;
+  max-width: 900px;
+}
+
+.tree-table {
+  width: 95%;
+  margin: 0 auto 50px auto;
+  border-collapse: collapse;
+  background: #1f283b;
+  color: #eee;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.tree-table th, .tree-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  text-align: center;
+}
+
+.tree-table th {
+  background: #8bc34a;
+  color: #1f283b;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.tree-table img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Избери своя план:</h2>
+    <div class="price-row">
+      <div class="price-col">
+        <p>Starter</p>
+        <h3>Freemium</h3>
+        <ul>
+          <li>Включва:</li>
+          <li>SOS бутон в спешни случай</li>
+          <li>маршрут до определена локация по зелен път</li>
+          <li>достъп до съвети за горещо време, които ще се обновяват</li>
+        </ul>
+      </div>
+      <div class="price-col">
+        <p>Advanced</p>
+        <h3>7,99 лв <span>/месец</span></h3>
+        <h4>4,09 € <span>/месец</span></h4>
+        <ul>
+          <li>Допълнителни неща като:</li>
+          <li>специални обекти на картата</li>
+          <li>зелени локации и маршрути</li>
+          <li>може да прегладате съвети, които да бъдат написани в сайта</li>
+          <li>Dop neshta</li>
+        </ul>
+        <button onclick="window.location.href='payment7.html'">Добави в количката</button>
+      </div>
+      <div class="price-col">
+        <p>Premium</p>
+        <h3>15,99 лв <span>/месец</span></h3>
+        <h4>7,76 € <span>/месец</span></h4>
+        <ul>
+          <li>Подходящо за бизнеси</li>
+          <li>обяви на еко обекти</li>
+          <li>партньорство с нас</li>
+          <li>специално обозначение на картата </li>
+          <li>реклама на нашите партньори</li>
+        </ul>
+        <button onclick="window.location.href='payment15.html'">Добави в количката</button>
+      </div>
+    </div>
+    <p class="krai">© 2025 Проект "SHADE SEEKERS" | Зеленоватори</p>
+  </div>
+
+  <div class="section-divider"><span>Подкрепете ни</span></div>
+
+  <div class="donate-block">
+    <h2>Дарете за повече зелени градове</h2>
+    <p>Вашата подкрепа ни помага да развиваме нови функции и да правим града по-прохладен и приятен за всички.</p>
+    <a href="payment_donate.html">Дарете сега</a>
+  </div>
+
+
+<section class="trees-info">
+  <h2>Дървета за улично озеленяване</h2>
+  <p>Вдъхновени от природата, подбрахме част от най-подходящите дървесни видове за градска среда. 
+  Те не само ще красят улиците, но и ще създават сянка, свежест и баланс в София.</p>
+</section>
+
+<table class="tree-table">
+  <thead>
+    <tr>
+      <th>№</th>
+      <th>Снимка</th>
+      <th>Латинско име</th>
+      <th>Българско име</th>
+      <th>Размер / форма</th>
+      <th>Изисквания</th>
+      <th>Декоративни особености</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td><img src="images/1.png" alt="Acer campestre"></td>
+      <td><i>Acer campestre</i></td>
+      <td>Полски клен</td>
+      <td>до 15 m, топчеста корона</td>
+      <td>сенкоиздръжлив, нечувствителен към замърсяване</td>
+      <td>жълта есенна окраска</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td><img src="images/2.png" alt="Acer platanoides"></td>
+      <td><i>Acer platanoides</i></td>
+      <td>Шестил</td>
+      <td>до 20 m, яйцевидна корона</td>
+      <td>сенкоиздръжлив</td>
+      <td>червенолистни и вариегатни форми</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td><img src="images/3.png" alt="Acer pseudoplatanus"></td>
+      <td><i>Acer pseudoplatanus</i></td>
+      <td>Обикновен явор</td>
+      <td>до 30 m, обратнойцевидна корона</td>
+      <td>сенкоиздръжлив</td>
+      <td>жълта есенна багра</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td><img src="images/4.png" alt="Celtis australis"></td>
+      <td><i>Celtis australis</i></td>
+      <td>Копривка</td>
+      <td>до 15–20 m, кълбовидна корона</td>
+      <td>сухоустойчив, светлолюбив, газоустойчив, ветроустойчив</td>
+      <td>жълта есенна багра</td>
+    </tr>
+    <tr>
+      <td>5</td>
+      <td><img src="images/5.png" alt="Platanus acerifolia"></td>
+      <td><i>Platanus acerifolia</i></td>
+      <td>Чинар</td>
+      <td>до 35 m, широка корона</td>
+      <td>бързорастящ, дълговечен, устойчив на замърсяване</td>
+      <td>петниста кора, красиви съплодия</td>
+    </tr>
+    <tr>
+      <td>6</td>
+      <td><img src="images/6.png" alt="Quercus rubra"></td>
+      <td><i>Quercus rubra</i></td>
+      <td>Червен дъб</td>
+      <td>до 20 m, широка корона</td>
+      <td>студоустойчив, бързорастящ, светлолюбив</td>
+      <td>ефектна червена есенна окраска</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td><img src="images/7.png" alt="Tilia tomentosa"></td>
+      <td><i>Tilia tomentosa</i></td>
+      <td>Сребролистна липа</td>
+      <td>до 25 m, яйцевидна корона</td>
+      <td>светлолюбива, сухоустойчива</td>
+      <td>приятен аромат през лятото</td>
+    </tr>
+    <tr>
+      <td>8</td>
+      <td><img src="images/8.png" alt="Fraxinus excelsior"></td>
+      <td><i>Fraxinus excelsior</i></td>
+      <td>Обикновен ясен</td>
+      <td>до 30 m, ажурна корона</td>
+      <td>бързорастящ, дълговечен, устойчив на замърсяване</td>
+      <td>жълта есенна окраска</td>
+    </tr>
+    <tr>
+      <td>9</td>
+      <td><img src="images/9.png" alt="Fraxinus oxycarpa"></td>
+      <td><i>Fraxinus oxycarpa</i></td>
+      <td>Полски ясен</td>
+      <td>до 30 m, ажурна корона</td>
+      <td>бързорастящ, сухоустойчив</td>
+      <td>красива есенна окраска</td>
+    </tr>
+  </tbody>
+</table>
+
+</body>
+</html>

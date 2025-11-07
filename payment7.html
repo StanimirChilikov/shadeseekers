@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - SHADE SEEKERS</title>
+    <link rel="icon" type="image/x-icon" href="images/logoo2.png">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-size: 'Popins', sans-serif;
+        }
+        .container{
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(138, 154, 91);
+        }
+        .payment-section{
+            height: 620px;
+            width: 1100px;
+            background-color: whitesmoke;
+            border-radius: 1rem;
+            overflow: hidden;
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            color: black;
+            box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.6);
+        }
+        .col-1{
+            padding: 3rem 3rem;
+        }
+        h2{
+            text-align: center;
+            font-size: 52px;
+            font-weight: 800;
+        }
+        .input-group-1{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .input-group-1 input{
+            width: 450px;
+            height: 60px;
+            border-radius: 0.5rem;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            border: none;
+            background-color: rgb(235, 235, 235);
+        }
+        input::placeholder{
+            text-align: center;
+            font-size: 16px;
+        }
+        .input-group-2{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .input-group-2 input{
+            width: 215px;
+            height: 60px;
+            border-radius: 0.5rem;
+            border: none;
+            background-color: rgb(235, 235, 235);
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+        .col-1 form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem;
+        }
+        .save-card{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        form button{
+            padding: 15px 170px;
+            border-radius: 0.5rem;
+            font-size: 24px;
+            text-wrap: nowrap;
+            text-align: center;
+            font-weight: 600;
+            border: 3px solid transparent;
+            background-color: rgb(138, 154, 91);
+            color: whitesmoke;
+            transition: 0.3s ease-in-out;
+            cursor: pointer;
+            position: relative;
+        }
+        form button:disabled {
+            background-color: #8c8c8c;
+            color: #e0e0e0;
+            cursor: not-allowed;
+        }
+        .spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid #fff;
+            border-radius: 50%;
+            border-top: 3px solid #8a9a5b;
+            animation: spin 1s linear infinite;
+            vertical-align: middle;
+            margin-right: 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg);}
+            100% { transform: rotate(360deg);}
+        }
+        .success-message {
+            text-align: center;
+            font-size: 2rem;
+            color: #4BB543;
+            margin-top: 2rem;
+            animation: fadeIn 0.5s;
+        }
+        .checkmark {
+            display: block;
+            margin: 0 auto 1rem auto;
+            width: 60px;
+            height: 60px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0;}
+            to { opacity: 1;}
+        }
+        .col-2{
+            display: grid;
+            place-items: center;
+        }
+        .col-2 .card{
+            position: absolute;
+            width: 400px;
+            height: 230px;
+            background: rgb(30, 30, 30);
+            color: whitesmoke;
+            border-radius: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            padding: 1.3rem;
+            gap: 1rem;
+            cursor: pointer;
+        }
+        .card .row-1{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .row-1 span{
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 20px;
+        }
+        .card .row-2{
+            display: flex;
+            flex-direction: column;
+            align-items: baseline;
+        }
+        .card .row-3{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .logo{
+            width: 50px;
+        }
+        .chip{
+            width: 60px;
+        }
+        .card-backside{
+            width: 400px;
+            height: 230px;
+            background: rgb(30, 30, 30);
+            color: whitesmoke;
+            border-radius: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            padding: 0 1.3rem;
+            gap: 1rem;
+            cursor: pointer;
+            transform: rotateY(180deg);
+            z-index: 5;
+            backface-visibility: hidden;
+        }
+        .card-backside h5{
+            font-size: 12px;
+            text-align: center;
+            margin-top: 8px;
+        }
+        .black-strip{
+            position: absolute;
+            left: 0;
+            top: 30px;
+            width: 100%;
+            height: 50px;
+            background-color: black;
+        }
+        .cvv{
+            width: 70%;
+            padding: 0.3rem 0;
+            background-color: rgb(208, 208, 208);
+            border-radius: 5px;
+            margin-top: 3.2rem;
+            overflow: hidden;
+            text-align: right;
+        }
+        .cvv span{
+            background-color: whitesmoke;
+            color: black;
+            padding: 0.3rem;
+        }
+        .card-backside p{
+            font-size: 10px;
+        }
+        .card-wrapper{
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            transition: 0.6s;
+        }
+        .card-wrapper:hover{
+            transform: rotateY(180deg);
+        }
+        form span a {
+            color: rgb(138, 154, 91); 
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        form span a:visited {
+            color: rgb(138, 154, 91); 
+        }
+        /* Back Button Styles */
+        .back-btn {
+            background: linear-gradient(90deg, #8a9a5b 0%, #a6b87c 100%);
+            color: #fff;
+            border: none;
+            border-radius: 0.5rem;
+            padding: 12px 32px;
+            font-size: 20px;
+            font-weight: 700;
+            box-shadow: 0 4px 16px rgba(138,154,91,0.25), 0 2px 4px rgba(0,0,0,0.10);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+            position: absolute;
+            z-index: 10;
+        }
+        .back-btn.top-right {
+            top: 32px;
+            right: 48px;
+        }
+        .back-btn.under-success {
+            position: static;
+            display: block;
+            margin: 32px auto 0 auto;
+            box-shadow: 0 4px 16px rgba(138,154,91,0.25), 0 2px 4px rgba(0,0,0,0.10);
+        }
+        .back-btn:hover {
+            background: linear-gradient(90deg, #a6b87c 0%, #8a9a5b 100%);
+            transform: translateY(-2px) scale(1.04);
+            box-shadow: 0 8px 24px rgba(138,154,91,0.35), 0 4px 8px rgba(0,0,0,0.12);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="payment-section" style="position:relative;">
+            <button class="back-btn top-right" id="backBtn" onclick="history.back()">← Back</button>
+            <div class="col-1">
+                <h2>Payment</h2>
+                <form id="payment-form" autocomplete="off">
+                    <div class="input-group-1">
+                        <input type="text" id="cardholder-input" placeholder="Card Holder Name" required>
+                        <input type="text" id="cardnumber-input" maxlength="19" placeholder="Card Number" required>
+                    </div>
+                    <div class="input-group-2">
+                        <input type="text" id="expiry-input" maxlength="5" placeholder="MM/YY" required>
+                        <input type="text" id="cvv-input" maxlength="4" placeholder="000" required>
+                    </div>
+                    <div class="save-card">
+                        <input type="checkbox" id="save-card">
+                        <p>Save my card for faster checkout</p>
+                    </div>
+                    <button type="submit" id="pay-btn">
+                        Pay €4,09
+                    </button>
+                    <span>By clicking the button you confirm to have accepted
+                        <a href="terms.html">Terms of service</a>
+                    </span>
+                </form>
+                <div id="success-container" style="display:none;">
+                    <svg class="checkmark" viewBox="0 0 52 52">
+                        <circle cx="26" cy="26" r="25" fill="none" stroke="#4BB543" stroke-width="3"/>
+                        <path fill="none" stroke="#4BB543" stroke-width="4" d="M14 27 l7 7 l17 -17"/>
+                    </svg>
+                    <div class="success-message">Payment Successful!</div>
+                    <button class="back-btn under-success" id="backBtnSuccess" onclick="history.back()" style="display:none;">← Back</button>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="card-wrapper">
+                    <div class="card">
+                        <div class="row-1">
+                            <span>Master card
+                                <img src="images/pngwing.com.png" class="logo" alt="">
+                            </span>
+                            <img src="images/chip.png" alt="" class="chip">    
+                        </div>
+                        <div class="row-2">
+                            <p>Card Number</p>
+                            <h3 id="cardnumber-display">1234 1234 1234 1234</h3>
+                        </div>
+                        <div class="row-3">
+                            <p id="cardholder-display">Stanimir Chilikov</p>
+                            <span>Valid Thru <br> <span id="expiry-display">04/33</span></span>
+                        </div>
+                    </div>
+                    <div class="card-backside">
+                        <h5>Custom Service +1 123-456-789</h5>
+                        <div class="black-strip"></div>
+                        <div class="cvv">
+                            <span id="cvv-display">123</span>
+                        </div>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pellentesque eleifend felis, eget pharetra 
+                            sapien molestie sed. Nullam vel maximus velit. Nulla convallis orci nulla, a luctus ipsum vulputate non. 
+                            Cras augue massa, maximus vestibulum urna sed, venenatis ullamcorper nisl. </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.getElementById('cardholder-input').addEventListener('input', function() {
+            document.getElementById('cardholder-display').textContent = this.value || 'Card Holder';
+        });
+
+        document.getElementById('cardnumber-input').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '').replace(/(.{4})/g, '$1 ').trim();
+            document.getElementById('cardnumber-display').textContent = value || '1234 1234 1234 1234';
+            this.value = value;
+        });
+
+        document.getElementById('expiry-input').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length > 2) {
+                value = value.slice(0,2) + '/' + value.slice(2,4);
+            }
+            this.value = value;
+            document.getElementById('expiry-display').textContent = value || 'MM/YY';
+        });
+
+        document.getElementById('cvv-input').addEventListener('input', function() {
+            let value = this.value.replace(/\D/g, '').slice(0,4);
+            this.value = value;
+            document.getElementById('cvv-display').textContent = value || '000';
+        });
+
+        // Payment Button Logic
+        const form = document.getElementById('payment-form');
+        const payBtn = document.getElementById('pay-btn');
+        const successContainer = document.getElementById('success-container');
+        const backBtn = document.getElementById('backBtn');
+        const backBtnSuccess = document.getElementById('backBtnSuccess');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            if (!form.checkValidity()) {
+                form.reportValidity();
+                return;
+            }
+
+            payBtn.disabled = true;
+            payBtn.innerHTML = '<span class="spinner"></span>Processing...';
+
+            setTimeout(() => {
+                form.style.display = 'none';
+                successContainer.style.display = 'block';
+                // Hide top-right back button, show under-success back button
+                backBtn.style.display = 'none';
+                backBtnSuccess.style.display = 'block';
+            }, 1700); 
+        });
+    </script>
+</body>
+</html>
